@@ -55,7 +55,7 @@
 			fclose($fp);
 			return $access_token;
 		}else{
-			$url  = sprintf(ACCESS_TOKEN_URL, TEST_APPID,TEST_APPSECRET);
+			$url = sprintf(ACCESS_TOKEN_URL, TEST_APPID,TEST_APPSECRET);
 			file_put_contents('log.txt',$url,FILE_APPEND);
 			$httputil = new HttpComponent($url);
 			$httputil->createCurl();

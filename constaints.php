@@ -5,6 +5,11 @@
 	define('MAIN_APPSECRET','77abb8825f9ce11c6c96785ec6d706a5');
 	define('TEST_APPSECRET','3ab0dee3c87c2368ad89c57abdcac04d');
 
+	//获取access_token的方法
 	define('ACCESS_TOKEN_URL','https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=%s&secret=%s');
+	//获取服务器IP地址，可以用于验证
+	define('IP_LIST_URL','https://api.weixin.qq.com/cgi-bin/getcallbackip?access_token=%s');
+	//长连接转短链接
 	define('LONG2SHORT','https://api.weixin.qq.com/cgi-bin/shorturl?access_token=%s');
+	
 ?>

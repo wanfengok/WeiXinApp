@@ -12,8 +12,24 @@
 		$httpComp->createCurl();
 		return $httpComp;
 	}
+
+	function GetServerIpList(){
+		$url = sprintf(IP_LIST_URL,get_access_token());
+		$httpComp = new HttpComponent($url);
+		$httpComp->createCurl();
+		return $httpComp;
+	}
+
+	echo 'access_token:';
+	echo get_access_token()."<br/><hr><br/>";
 	
-	if($_GET['long_url']){
+	$result = GetServerIpList();
+	echo 'iplist:<br/>';
+	echo $result;
+	echo "<br/><hr><br/>";
+	file_put_contents('log.txt',$result,FILE_APPEND);
+
+	if(isset($_GET['long_url'])){
 		$result = Long2ShortUrl($_GET['long_url']);
 		file_put_contents('log.txt',$result,FILE_APPEND);
 		echo $result;
