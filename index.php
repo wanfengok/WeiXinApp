@@ -24,6 +24,7 @@
 			case 'event':
 				switch (strtolower($xml_doc->Event)) {
 					case 'subscribe':	//订阅消息
+                        /*
 					    $textMessage = new TextMessage();
 					    $textMessage->setToUserName($xml_doc->FromUserName);
 					    $textMessage->setFromUserName($xml_doc->ToUserName);
@@ -32,7 +33,16 @@
 					    $textMessage->setContent('你好，我只是测试的');
 						file_put_contents('log.txt',$textMessage->toXml(),FILE_APPEND);
 						file_put_contents('php://output',$textMessage->toXml());
-						break;
+						*/
+
+                        $imageMessage = new ImageMessage();
+                        $imageMessage->setToUserName($xml_doc->FromUserName);
+                        $imageMessage->setFromUserName($xml_doc->ToUserName);
+                        $imageMessage->setCreateTime($xml_doc->CreateTime);
+                        $imageMessage->setMediaId("3pg55ETC9uJmXYnCetpIJJ6s0dyAhyUQzNmqbPFxd_LOLlQcRATidOUYzVIHKL3Z");
+                        file_put_contents('php://output',$imageMessage->toXml());
+                        file_put_contents('log.txt',$imageMessage->toXml(),FILE_APPEND);
+                        break;
 					case 'unsubscribe':	//取消关注
 						file_put_contents('log.txt',"unsubscribe\n",FILE_APPEND);
 						break;

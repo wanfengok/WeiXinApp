@@ -70,8 +70,8 @@
 		    $this->_useragent = $userAgent;
 		} 
 
-		public function send_request($url = 'nul',$method = 'GET',$data='nul',$contentType = 'application/json',$timeout = 30)
-		{ 
+		public function send_request($url = 'nul',$method = 'GET',$data='nul',$contentType = 'nul',$timeout = 30)
+		{
 			if($url != 'nul'){ 
                 $this->_url = $url;
             }
@@ -92,15 +92,20 @@
                 curl_setopt($s, CURLOPT_USERPWD, $this->auth_name.':'.$this->auth_pass);
             }
 
-            if($contentType || $this->_contentType){
-                curl_setopt($s,CURLOPT_HTTPHEADER,array('Content-Type:'.($contentType||$this->_contentType)));
+            if(isset($this->_contentType) || $contentType!='nul'){
+                $content_type = isset($this->_contentType)?$this->_contentType:$contentType;
+                curl_setopt($s,CURLOPT_HTTPHEADER,array('Content-Type:'.$content_type));
             }
-            file_put_contents("log.txt",$this->_post,FILE_APPEND);
+            //file_put_contents("log.txt",$this->_post,FILE_APPEND);
+
             if($this->_post || $method === 'POST')
             {
                 echo 'post<br/>';
                 curl_setopt($s,CURLOPT_POST,true);
-                curl_setopt($s,CURLOPT_POSTFIELDS,($this->_postFields||$data));
+                $postfiled = isset($this->_postFields)?$this->_postFields:$data;
+                curl_setopt($s,CURLOPT_POSTFIELDS,$postfiled);
+                echo var_dump($postfiled);
+
             }
 
             if($this->_includeHeader)
