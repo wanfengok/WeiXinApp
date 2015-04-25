@@ -78,7 +78,7 @@
 		}
 	}
 
-	switch ($_SERVER['REQUEST_METHOD']) {
+	switch (strtoupper($_SERVER['REQUEST_METHOD'])) {
 		case 'POST':
 			doPost();
 			break;

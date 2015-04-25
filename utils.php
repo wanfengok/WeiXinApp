@@ -9,16 +9,21 @@
 		$httpComp = new HttpComponent($url);
 		$postValue = json_encode(array('action'=>'long2short','long_url'=>$req_url));
 		$httpComp->setPost($postValue,TRUE);
-		$httpComp->createCurl();
-		return $httpComp;
+        $httpComp->setContentType("application/json");
+		$httpComp->send_request();
+		return $httpComp->getHttpResult();
 	}
 
 	function GetServerIpList(){
 		$url = sprintf(IP_LIST_URL,get_access_token());
 		$httpComp = new HttpComponent($url);
-		$httpComp->createCurl();
-		return $httpComp;
+		$httpComp->send_request();
+		return $httpComp->getHttpResult();
 	}
+
+    function UploadMedia(){
+        $url = sprintf(UPLOAD_MEDIA_URL,get_access_token());
+    }
 
 	echo 'access_token:';
 	echo get_access_token()."<br/><hr><br/>";

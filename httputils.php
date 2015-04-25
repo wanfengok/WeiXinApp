@@ -21,11 +21,11 @@
 		protected $_header; 
  		//返回页面内容
  		protected $_webpage; 
- 		//是否发送的是json数据
- 		protected $_json;
+ 		//设定contentType类型
+ 		protected $_contentType;
  		//是否以二进制进行传输
-     		protected $_binaryTransfer; 
-     		public    $authentication = 0; 
+     	protected $_binaryTransfer;
+     	public    $authentication = 0;
 		public    $auth_name      = ''; 
 		public    $auth_pass      = ''; 
 
@@ -51,80 +51,83 @@
 		} 
 
 		public function setCookiFileLocation($path) 
-		{ 
-		         	$this->_cookieFileLocation = $path; 
+		{
+            $this->_cookieFileLocation = $path;
 		} 
 
-		public function setPost ($postFields,$json=false) 
+		public function setPost ($postFields)
 		{ 
 			$this->_post = true; 
-			$this->_postFields = $postFields; 
-			$this->_json = $json;
-		} 
+			$this->_postFields = $postFields;
+		}
+
+        public function setContentType($contentType){
+            $this->_contentType = $contentType;
+        }
 
 		public function setUserAgent($userAgent) 
 		{ 
-		         	$this->_useragent = $userAgent; 
+		    $this->_useragent = $userAgent;
 		} 
 
-		public function createCurl($url = 'nul') 
+		public function send_request($url = 'nul',$method = 'GET',$data='nul',$contentType = 'application/json',$timeout = 30)
 		{ 
 			if($url != 'nul'){ 
-          				$this->_url = $url; 
-		        	} 
+                $this->_url = $url;
+            }
 
-		         	$s = curl_init(); 
+            $s = curl_init();
+            curl_setopt($s,CURLOPT_URL,$this->_url);
+            curl_setopt($s,CURLOPT_HTTPHEADER,array('Expect:'));
+            curl_setopt($s,CURLOPT_TIMEOUT,$this->_timeout);
+            curl_setopt($s,CURLOPT_RETURNTRANSFER,true);
+            curl_setopt($s,CURLOPT_SSL_VERIFYPEER, FALSE);
+            curl_setopt($s,CURLOPT_SSL_VERIFYHOST, FALSE);
+            curl_setopt($s,CURLOPT_COOKIEJAR,$this->_cookieFileLocation);
+            curl_setopt($s,CURLOPT_COOKIEFILE,$this->_cookieFileLocation);
 
-		         	curl_setopt($s,CURLOPT_URL,$this->_url); 
-		         	curl_setopt($s,CURLOPT_HTTPHEADER,array('Expect:')); 
-		         	curl_setopt($s,CURLOPT_TIMEOUT,$this->_timeout); 
-		         	curl_setopt($s,CURLOPT_RETURNTRANSFER,true); 
-		         	curl_setopt($s,CURLOPT_SSL_VERIFYPEER, FALSE);
-					curl_setopt($s,CURLOPT_SSL_VERIFYHOST, FALSE);
-		         	curl_setopt($s,CURLOPT_COOKIEJAR,$this->_cookieFileLocation); 
-		         	curl_setopt($s,CURLOPT_COOKIEFILE,$this->_cookieFileLocation); 
 
-		         	if($this->authentication == 1){ 
-		         		echo 'auth<br/>';
-		           		curl_setopt($s, CURLOPT_USERPWD, $this->auth_name.':'.$this->auth_pass); 
-		         	}
+            if($this->authentication == 1){
+                echo 'auth<br/>';
+                curl_setopt($s, CURLOPT_USERPWD, $this->auth_name.':'.$this->auth_pass);
+            }
 
-		         	file_put_contents("log.txt",$this->_post,FILE_APPEND);
-		         	if($this->_post) 
-		         	{ 
-		         		echo '<br/>post<br/>';
-		             	curl_setopt($s,CURLOPT_POST,true); 
-		             	curl_setopt($s,CURLOPT_POSTFIELDS,$this->_postFields); 
-		             	if($this->_json){
-		         			curl_setopt($s,CURLOPT_HTTPHEADER,array('Content-Type:application/json;encoding=utf-8','Content-Length: ' . strlen($this->_postFields)));
-		         			//echo $this->_postFields;
-		         		}
-		         	} 
+            if($contentType || $this->_contentType){
+                curl_setopt($s,CURLOPT_HTTPHEADER,array('Content-Type:'.($contentType||$this->_contentType)));
+            }
+            file_put_contents("log.txt",$this->_post,FILE_APPEND);
+            if($this->_post || $method === 'POST')
+            {
+                echo 'post<br/>';
+                curl_setopt($s,CURLOPT_POST,true);
+                curl_setopt($s,CURLOPT_POSTFIELDS,($this->_postFields||$data));
+            }
 
-		         	if($this->_includeHeader) 
-		         	{ 
-		         		echo 'header<br/>';
-		         		curl_setopt($s,CURLOPT_HEADER,true);
-		         		echo $this->_json;
-		         	} 
+            if($this->_includeHeader)
+            {
+                echo 'header<br/>';
+                curl_setopt($s,CURLOPT_HEADER,true);
+            }
 
-		         	if($this->_noBody) 
-		         	{ 
-		         		echo 'body<br/>';
-		             	curl_setopt($s,CURLOPT_NOBODY,true); 
-		         	} 
+            if($this->_noBody)
+            {
+                echo 'body<br/>';
+                curl_setopt($s,CURLOPT_NOBODY,true);
+            }
 
-		         	if($this->_binaryTransfer) 
-		         	{ 
-		         		echo 'binary<br/>';
-		             	curl_setopt($s,CURLOPT_BINARYTRANSFER,true); 
-		         	} 
+            if($this->_binaryTransfer)
+            {
+                echo 'binary<br/>';
+                curl_setopt($s,CURLOPT_BINARYTRANSFER,true);
+            }
 
-		         	curl_setopt($s,CURLOPT_USERAGENT,$this->_useragent); 
+            curl_setopt($s,CURLOPT_USERAGENT,$this->_useragent);
 
-		         	$this->_webpage = curl_exec($s); 
-		         	$this->_header = curl_getinfo($s); 
-		         	curl_close($s); 
+            $this->_webpage = curl_exec($s);
+            $this->_header = curl_getinfo($s);
+            curl_close($s);
+
+            return $this->_webpage;
 		} 
 
 		public function getHttpHeader() 
@@ -132,7 +135,7 @@
 			return $this->_header; 
 		} 
 
-		public function __tostring(){ 
+		public function getHttpResult(){
 			return $this->_webpage; 
 		} 
 	}

@@ -11,5 +11,9 @@
 	define('IP_LIST_URL','https://api.weixin.qq.com/cgi-bin/getcallbackip?access_token=%s');
 	//长连接转短链接
 	define('LONG2SHORT','https://api.weixin.qq.com/cgi-bin/shorturl?access_token=%s');
+    //上传临时素材文件
+    define('UPLOAD_MEDIA_URL','https://api.weixin.qq.com/cgi-bin/media/upload?access_token=%s&type=%s');
+    //上传永久素材文件
+    define('ADD_MATERIAL_URL','http://api.weixin.qq.com/cgi-bin/material/add_material?access_token=%s');
 	
 ?>

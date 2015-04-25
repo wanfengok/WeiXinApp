@@ -58,8 +58,7 @@
 			$url = sprintf(ACCESS_TOKEN_URL, TEST_APPID,TEST_APPSECRET);
 			file_put_contents('log.txt',$url,FILE_APPEND);
 			$httputil = new HttpComponent($url);
-			$httputil->createCurl();
-			$content = $httputil;
+            $content = $httputil->send_request();
 			$result = json_decode($content);
 			if(is_object($result)){
 				$fp = fopen(ACCESS_TOKEN,'w');
