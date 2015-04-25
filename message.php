@@ -44,6 +44,14 @@
 			return $this->_msgId;
 		}
 
+        public function __get($name){
+            return $this->$name;
+        }
+
+        public function __set($name,$value){
+            $this->$name = $value;
+        }
+
 		public function __tostring(){
 			return 'from:'.$this->_fromUserName.' to:'.$this->_toUserName.',send msg type:'.$this->_msgType.'(msgid:'.$this->_msgId.') at :'.$this->_createTime;
 		}
@@ -122,6 +130,10 @@
 	class VoiceMessage extends BaseMessage{
 		private $_voiceMediaId;
 
+        public function __construct(){
+            $this->setMsgType('voice');
+        }
+
 		public function setVoiceMediaId($voiceMediaId){
 			$this->_voiceMediaId = $voiceMediaId;
 		}
@@ -151,6 +163,10 @@
 		private $_videoMediaId;
 		private $_videoTitle;
 		private $_videoDesc;
+
+        public function __construct(){
+            $this->setMsgType('video');
+        }
 
 		public function setVideoMediaId($videoMediaId){
 			$this->_videoMediaId = $videoMediaId;
@@ -186,12 +202,63 @@
 		private $_musicHQMusicUrl;
 		private $_musicThumbMediaId;
 
+        public function __construct(){
+            $this->setMsgType('music');
+        }
+
 		public function setMusicTitle($musicTitle){
-			$this->_musicTitle = $musicTitle;
+			$this->musicTitle = $musicTitle;
 		}
 		public function getMusicTitle(){
 			return $this->_musicTitle;
 		}
+
+        public function setMusicDesc($value){
+            $this->_musicDesc = $value;
+        }
+
+        public function getMusicDesc(){
+            return $this->_musicDesc;
+        }
+
+        public function setMusicUrl($value){
+            $this->_musicUrl = $value;
+        }
+
+        public function getMusicUrl(){
+            return $this->_musicUrl;
+        }
+
+        public function setMusicHQMusicUrl($value){
+            $this->_musicHQMusicUrl = $value;
+        }
+
+        public function getMusicHQMusicUrl(){
+            return $this->_musicHQMusicUrl;
+        }
+
+        public function setMusicThumbMediaId($value){
+            $this->_musicThumbMediaId = $value;
+        }
+
+        public function getMusicThumbMediaId(){
+            return $this->_musicThumbMediaId;
+        }
+
+        public function toXml(){
+            $xml = '<xml><ToUserName><![CDATA['.$this->getToUserName().']]></ToUserName>';
+            $xml.= '<FromUserName><![CDATA['.$this->getFromUserName().']]></FromUserName>';
+            $xml.= '<CreateTime>'.$this->getCreateTime().'</CreateTime>';
+            $xml.= '<MsgType><![CDATA['.$this->getMsgType().']]></MsgType>';
+            $xml.= '<Music><Title><![CDATA['.$this->getMusicTitle().']]></Title>';
+            $xml.= '<Description><![CDATA['.$this->getMusicDesc().']]></Description>';
+            $xml.= '<MusicUrl><![CDATA['.$this->getMusicUrl().']]></MusicUrl>';
+            $xml.= '<HQMusicUrl><![CDATA['.$this->getMusicHQMusicUrl().']]></HQMusicUrl>';
+            $xml.= '<ThumbMediaId><![CDATA['.$this->getMusicThumbMediaId().']]></ThumbMediaId>';
+            $xml.= '</Music></xml>';
+            return $xml;
+        }
+
 	}
 
 	/**

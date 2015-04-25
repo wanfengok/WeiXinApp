@@ -36,6 +36,11 @@
     //发送模板消息
     define('SEND_TEMPLATE_URL','https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=%s');
 
+    //生成二维码
+    define('QRCODE_URL','https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=%s');
+    //展示二维码图片
+    define('SHOW_QRCODE_URL','https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=%s');
+
     //语义理解请求
-    define('SEARCH','https://api.weixin.qq.com/semantic/semproxy/search?access_token=%s');
+    define('SEARCH_URL','https://api.weixin.qq.com/semantic/semproxy/search?access_token=%s');
 ?>

@@ -80,7 +80,7 @@ function getTmeplateId($temlate_id_short){
 function sendTemplateMessage($touser,$templateid,$url){
     $url = sprintf(SEND_TEMPLATE_URL,get_access_token());
     $httpComp = new HttpComponent($url);
-    $httpComp -> setContentType("application/json");
+    $httpComp -> setContentType("application/json;charset:utf-8");
     $data = array(
         'touser'=>$touser,
         'template_id'=>$templateid,
@@ -115,7 +115,7 @@ function sendTemplateMessage($touser,$templateid,$url){
 }
 
 $openid = 'oBdXVswJMWX_S5tMPJ-V_IxJ9p50';
-$templateid = "TM00001";
+$templateid = "TM00015";
 $industry_id1=1;
 $industry_id2=3;
 $downurl = "http://weixin.qq.com/download";
@@ -126,5 +126,5 @@ if(isset($_GET["debug"])){
     $result = getTmeplateId($templateid);
     echo $result;
     $convert_template_id = json_decode($result)->template_id;
-    sendTemplateMessage($openid,$convert_template_id,$downurl);
+    echo sendTemplateMessage($openid,$convert_template_id,$downurl);
 }

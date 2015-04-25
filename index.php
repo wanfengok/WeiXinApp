@@ -64,6 +64,21 @@
 				break;
 			case 'text':	//文本消息
 				file_put_contents('log.txt',"text message\n",FILE_APPEND);
+                $content = $xml_doc->Content;
+                if(isset($content)){
+                    if(strstr($content,'音乐')){
+                        $musicMessage = new MusicMessage();
+                        $musicMessage->setToUserName($xml_doc->FromUserName);
+                        $musicMessage->setFromUserName($xml_doc->ToUserName);
+                        $musicMessage->setCreateTime($xml_doc->CreateTime);
+                        $musicMessage->setMusicTitle("测试");
+                        $musicMessage->setMusicDesc("一段测试的音乐");
+                        $musicMessage->setMusicUrl("http://weixin.filmtin.com/Trouble.mp3");
+                        $musicMessage->setMusicHQMusicUrl("http://weixin.filmtin.com/Trouble.mp3");
+                        $musicMessage->setMusicThumbMediaId("dSiIq1Bq6m0hCWj4Qvr93v2FuKDS-QbNlYx4EataxEsLBK7O967vFQF1LtLcYOnq");
+                        file_put_contents('php://output',$musicMessage->toXml());
+                    }
+                }
 				break;
 			case 'image':	//图片消息
 				file_put_contents('log.txt',"image message\n",FILE_APPEND);

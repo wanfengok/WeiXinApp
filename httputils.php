@@ -25,11 +25,12 @@
  		protected $_contentType;
  		//是否以二进制进行传输
      	protected $_binaryTransfer;
+        //authertication认证
      	public    $authentication = 0;
 		public    $auth_name      = ''; 
 		public    $auth_pass      = ''; 
 
-		public function __construct($url,$timeOut = 30,$binaryTransfer = false,$includeHeader = false,$noBody = false){
+		public function __construct($url,$timeOut = 120,$binaryTransfer = false,$includeHeader = false,$noBody = false){
 			$this->_url = $url;
 			$this->_timeout = $timeOut;
 			$this->_binaryTransfer = $binaryTransfer;
@@ -70,7 +71,7 @@
 		    $this->_useragent = $userAgent;
 		} 
 
-		public function send_request($url = 'nul',$method = 'GET',$data='nul',$contentType = 'nul',$timeout = 30)
+		public function send_request($url = 'nul',$method = 'GET',$data='nul',$contentType = 'nul',$timeout = 120)
 		{
 			if($url != 'nul'){ 
                 $this->_url = $url;
@@ -88,7 +89,6 @@
 
 
             if($this->authentication == 1){
-                echo 'auth<br/>';
                 curl_setopt($s, CURLOPT_USERPWD, $this->auth_name.':'.$this->auth_pass);
             }
 
@@ -100,29 +100,24 @@
 
             if($this->_post || $method === 'POST')
             {
-                echo 'post<br/>';
                 curl_setopt($s,CURLOPT_POST,true);
                 $postfiled = isset($this->_postFields)?$this->_postFields:$data;
                 curl_setopt($s,CURLOPT_POSTFIELDS,$postfiled);
-                echo var_dump($postfiled);
 
             }
 
             if($this->_includeHeader)
             {
-                echo 'header<br/>';
                 curl_setopt($s,CURLOPT_HEADER,true);
             }
 
             if($this->_noBody)
             {
-                echo 'body<br/>';
                 curl_setopt($s,CURLOPT_NOBODY,true);
             }
 
             if($this->_binaryTransfer)
             {
-                echo 'binary<br/>';
                 curl_setopt($s,CURLOPT_BINARYTRANSFER,true);
             }
 
