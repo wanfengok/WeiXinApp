@@ -87,25 +87,50 @@ function sendTemplateMessage($touser,$templateid,$url){
         'url'=>$url,
         'topcolor'=>'#FF0000',
         'data'=>array(
+            /*
             'first'=>array(
-                'value'=>'恭喜购买成功!',
+                'value'=>'您的贵宾卡消费成功!',
                 'color'=>'#173177'
             ),
-            'keynote1'=>array(
-                'value'=>'巧克力',
+            'keyword1'=>array(
+                'value'=>'100.00元',
                 'color'=>'#173177'
             ),
-            'keynote2'=>array(
-                'value'=>'39.8元',
+            'keyword2'=>array(
+                'value'=>'100分',
                 'color'=>'#173177'
             ),
-            'keynote3'=>array(
-                'value'=>'2014年9月16日',
+            'keyword3'=>array(
+                'value'=>'总店',
+                'color'=>'#173177'
+            ),
+            'keyword4'=>array(
+                'value'=>'900.00元',
+                'color'=>'#173177'
+            ),
+            'keyword5'=>array(
+                'value'=>'100分',
                 'color'=>'#173177'
             ),
             'remark'=>array(
-                'value'=>'欢迎再次购买',
+                'value'=>'谢谢惠顾,点击可查看消费详情！',
                 'color'=>'173177'
+            )*/
+            'productType'=>array(
+                'value'=>'商品名',
+                'color'=>'#173177'
+            ),
+            'name'=>array(
+                'value'=>'酷睿i5 CPU',
+                'color'=>'#173177'
+            ),
+            'number'=>array(
+                'value'=>'1份',
+                'color'=>'#173177'
+            ),
+            'remark'=>array(
+                'value'=>'如有疑问，请致电15999551017联系我们，或回复M来了解详情。',
+                'color'=>'#173177'
             )
         )
     );
@@ -115,16 +140,20 @@ function sendTemplateMessage($touser,$templateid,$url){
 }
 
 $openid = 'oBdXVswJMWX_S5tMPJ-V_IxJ9p50';
-$templateid = "TM00015";
+$templateid = "TM00018";
 $industry_id1=1;
 $industry_id2=3;
 $downurl = "http://weixin.qq.com/download";
 
 if(isset($_GET["debug"])){
     echo 'test';
-    setIndustry($industry_id1,$industry_id2);
-    $result = getTmeplateId($templateid);
-    echo $result;
-    $convert_template_id = json_decode($result)->template_id;
+    //setIndustry($industry_id1,$industry_id2);
+    //$result = getTmeplateId($templateid);
+    //echo $result;
+    //if(strstr($result,"template_id")){
+        //$convert_template_id = json_decode($result)->template_id;
+    $convert_template_id = 'LjOyLin4aX5HZFGlbeKIstA-9D4gA4A4K7SuS1noQ0c';
     echo sendTemplateMessage($openid,$convert_template_id,$downurl);
+    //}
+
 }

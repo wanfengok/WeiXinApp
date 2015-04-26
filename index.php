@@ -20,7 +20,8 @@
 	function doPost(){
 		$xml_str= file_get_contents("php://input"); 
 		$xml_doc = simplexml_load_string($xml_str);
-		switch ($xml_doc->MsgType) {
+        file_put_contents('log.txt',$xml_str,FILE_APPEND);
+		switch (strtolower($xml_doc->MsgType)) {
 			case 'event':
 				switch (strtolower($xml_doc->Event)) {
 					case 'subscribe':	//订阅消息
@@ -81,8 +82,15 @@
                         $item->setTitle("中国大妈");
                         $item->setDesc("中国大妈跳广场舞被杀");
                         $item->setPicUrl("http://weixin.filmtin.com/bg600.jpg");
-                        $item->setUrl("http://weixin.filetin.com/info.php");
-                        $articleMessage = new ArticleMessage(array($item));
+                        $item->setUrl("http://weixin.filmtin.com/info.php");
+
+                        $item1 = new Item();
+                        $item1->setTitle("尼泊尔地震");
+                        $item1->setDesc("尼泊尔地震已经造成至少1500人丧生");
+                        $item1->setPicUrl("http://weixin.filmtin.com/bg600.jpg");
+                        $item1->setUrl("http://weixin.filmtin.com/info.php");
+
+                        $articleMessage = new ArticleMessage(array($item,$item1));
                         $articleMessage->setToUserName($xml_doc->FromUserName);
                         $articleMessage->setFromUserName($xml_doc->ToUserName);
                         $articleMessage->setCreateTime($xml_doc->CreateTime);
@@ -108,7 +116,7 @@
                 $voiceMessage->setFromUserName($xml_doc->ToUserName);
                 $voiceMessage->setCreateTime($xml_doc->CreateTime);
                 //media_id=>"3pg55ETC9uJmXYnCetpIJJ6s0dyAhyUQzNmqbPFxd_LOLlQcRATidOUYzVIHKL3Z"
-                $voiceMessage->setMediaId($xml_doc->MediaId);
+                $voiceMessage->setVoiceMediaId($xml_doc->MediaId);
                 file_put_contents('log.txt',$voiceMessage->toXml(),FILE_APPEND);
                 file_put_contents('php://output',$voiceMessage->toXml());
 				break;

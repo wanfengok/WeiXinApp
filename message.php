@@ -151,7 +151,7 @@
 			$xml.= '<FromUserName><![CDATA['.$this->getFromUserName().']]></FromUserName>';
 			$xml.= '<CreateTime>'.$this->getCreateTime().'</CreateTime>';
 			$xml.= '<MsgType><![CDATA['.$this->getMsgType().']]></MsgType>';
-			$xml.= '<Voice><MediaId><![CDATA['.$this->getMediaId().']]></MediaId></Voice></xml>';
+			$xml.= '<Voice><MediaId><![CDATA['.$this->getVoiceMediaId().']]></MediaId></Voice></xml>';
 			return $xml;
 		}
 	}
@@ -314,11 +314,11 @@
             return $this->_articles;
         }
 
-        public  function __constructor($articles){
+        public  function __construct($articles){
             $this->setMsgType("news");
             if(is_array($articles) && count($articles)>0){
                 foreach($articles as $item){
-                    $this->_articles = $articles;
+                    array_push($this->_articles,$item);
                 }
                 $this->_articleCount = count($this->_articles);
             }
