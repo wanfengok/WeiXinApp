@@ -276,10 +276,65 @@
 		public function getTitle(){
 			return $this->_title;
 		}
+
+        public function setDesc($item_desc){
+            $this->_desc = $item_desc;
+        }
+
+        public function  getDesc(){
+            return $this->_desc;
+        }
+
+        public function setPicUrl($item_pic_url){
+            $this->_picUrl = $item_pic_url;
+        }
+
+        public function getPicUrl(){
+            return $this->_picUrl;
+        }
+
+        public function setUrl($item_url){
+            $this->_Url = $item_url;
+        }
+
+        public function getUrl(){
+            return $this->_Url;
+        }
 	}
 
 	class ArticleMessage extends BaseMessage{
 		private $_articleCount;
 		private $_articles = array();
+
+        public function getArticlesCount(){
+            return $this->_articleCount;
+        }
+
+        public function getArticles(){
+            return $this->_articles;
+        }
+
+        public  function __constructor($articles){
+            $this->setMsgType("news");
+            if(is_array($articles) && count($articles)>0){
+                $this->_articles = $articles;
+                $this->_articleCount = count($this->_articles);
+            }
+        }
+
+        public  function toXml(){
+            $xml = '<xml><ToUserName><![CDATA['.$this->getToUserName().']]></ToUserName>';
+            $xml.= '<FromUserName><![CDATA['.$this->getFromUserName().']]></FromUserName>';
+            $xml.= '<CreateTime>'.$this->getCreateTime().'</CreateTime>';
+            $xml.= '<MsgType><![CDATA['.$this->getMsgType().']]></MsgType>';
+            $xml.= '<ArticleCount><![CDATA['.$this->getArticlesCount().']]></ArticleCount>';
+            $xml.= '<Articles><Title><![CDATA['.$this->getMusicTitle().']]></Title>';
+            $xml.= '<Description><![CDATA['.$this->getMusicDesc().']]></Description>';
+            $xml.= '<MusicUrl><![CDATA['.$this->getMusicUrl().']]></MusicUrl>';
+            $xml.= '<HQMusicUrl><![CDATA['.$this->getMusicHQMusicUrl().']]></HQMusicUrl>';
+            $xml.= '<ThumbMediaId><![CDATA['.$this->getMusicThumbMediaId().']]></ThumbMediaId>';
+            $xml.= '</Articles></xml>';
+            return $xml;
+        }
 	}
 ?>
