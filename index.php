@@ -77,7 +77,17 @@
                         file_put_contents('php://output',$imageMessage->toXml());
                         file_put_contents('log.txt',$imageMessage->toXml(),FILE_APPEND);
                     }elseif(strstr($content,"图文")){
-
+                        $item = new Item();
+                        $item->setTitle("中国大妈");
+                        $item->setDesc("中国大妈跳广场舞被杀");
+                        $item->setPicUrl("http://weixin.filmtin.com/bg600.jpg");
+                        $item->setUrl("http://weixin.filetin.com/info.php");
+                        $articleMessage = new ArticleMessage(array($item));
+                        $articleMessage->setToUserName($xml_doc->FromUserName);
+                        $articleMessage->setFromUserName($xml_doc->ToUserName);
+                        $articleMessage->setCreateTime($xml_doc->CreateTime);
+                        file_put_contents('php://output',$articleMessage->toXml());
+                        file_put_contents('log.txt',$articleMessage->toXml(),FILE_APPEND);
                     }
                 }
 				break;
@@ -92,14 +102,15 @@
                 file_put_contents('log.txt',$imageMessage->toXml(),FILE_APPEND);
 				break;
 			case 'voice':	//语音消息
+                file_put_contents('log.txt',"voice message",FILE_APPEND);
                 $voiceMessage = new VoiceMessage();
                 $voiceMessage->setToUserName($xml_doc->FromUserName);
                 $voiceMessage->setFromUserName($xml_doc->ToUserName);
                 $voiceMessage->setCreateTime($xml_doc->CreateTime);
                 //media_id=>"3pg55ETC9uJmXYnCetpIJJ6s0dyAhyUQzNmqbPFxd_LOLlQcRATidOUYzVIHKL3Z"
                 $voiceMessage->setMediaId($xml_doc->MediaId);
-                file_put_contents('php://output',$voiceMessage->toXml());
                 file_put_contents('log.txt',$voiceMessage->toXml(),FILE_APPEND);
+                file_put_contents('php://output',$voiceMessage->toXml());
 				break;
 			case 'video':	//视频
 				file_put_contents('log.txt',"video message\n",FILE_APPEND);

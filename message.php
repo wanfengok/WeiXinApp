@@ -317,7 +317,9 @@
         public  function __constructor($articles){
             $this->setMsgType("news");
             if(is_array($articles) && count($articles)>0){
-                $this->_articles = $articles;
+                foreach($articles as $item){
+                    $this->_articles = $articles;
+                }
                 $this->_articleCount = count($this->_articles);
             }
         }
@@ -328,12 +330,15 @@
             $xml.= '<CreateTime>'.$this->getCreateTime().'</CreateTime>';
             $xml.= '<MsgType><![CDATA['.$this->getMsgType().']]></MsgType>';
             $xml.= '<ArticleCount><![CDATA['.$this->getArticlesCount().']]></ArticleCount>';
-            $xml.= '<Articles><Title><![CDATA['.$this->getMusicTitle().']]></Title>';
-            $xml.= '<Description><![CDATA['.$this->getMusicDesc().']]></Description>';
-            $xml.= '<MusicUrl><![CDATA['.$this->getMusicUrl().']]></MusicUrl>';
-            $xml.= '<HQMusicUrl><![CDATA['.$this->getMusicHQMusicUrl().']]></HQMusicUrl>';
-            $xml.= '<ThumbMediaId><![CDATA['.$this->getMusicThumbMediaId().']]></ThumbMediaId>';
-            $xml.= '</Articles></xml>';
+            $xml.= '<Articles>';
+            foreach($this->getArticles() as $item){
+                $xml.= '<item><Title><![CDATA['.$item->getTitle().']]></Title>';
+                $xml.= '<Description><![CDATA['.$item->getDesc().']]></Description>';
+                $xml.= '<PicUrl><![CDATA['.$item->getPicUrl().']]></PicUrl>';
+                $xml.= '<Url><![CDATA['.$item->getUrl().']]></Url>';
+                $xml.= '</item>';
+            }
+            $xml.='</Articles></xml>';
             return $xml;
         }
 	}
