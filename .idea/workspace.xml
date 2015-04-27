@@ -2,11 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="68f63808-aad2-4ad9-aad5-e80a9b37c8c8" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/db.php" />
-      <change type="DELETED" beforePath="D:\php\www\WeiXinApp\uploadmedia.php" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.php" afterPath="$PROJECT_DIR$/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/industry.php" afterPath="$PROJECT_DIR$/industry.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/message.php" afterPath="$PROJECT_DIR$/message.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="WeiXinApp.iws" />
@@ -60,7 +55,7 @@
       <file leaf-file-name="db.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/db.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="28" column="56" selection-start="894" selection-end="894" vertical-scroll-proportion="0.70886075" vertical-offset="28" max-vertical-offset="897">
+            <state line="23" column="47" selection-start="763" selection-end="773" vertical-scroll-proportion="0.5887191" vertical-offset="28" max-vertical-offset="897">
               <folding>
                 <marker date="1430044311127" expanded="true" signature="856:904" placeholder="select * fro..devices..." />
               </folding>
@@ -151,10 +146,8 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="46" />
-    <option name="y" value="117" />
-    <option name="width" value="1938" />
-    <option name="height" value="1050" />
+    <option name="width" value="1920" />
+    <option name="height" value="1032" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -208,6 +201,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="SearchEverywhereHistory" value="m" />
+    <property name="FullScreen" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -241,15 +235,15 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="46" y="117" width="1938" height="1050" extended-state="0" />
-    <editor active="true" />
+    <frame x="0" y="0" width="1920" height="1032" extended-state="0" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15141957" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -610,7 +604,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/db.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="56" selection-start="894" selection-end="894" vertical-scroll-proportion="0.70886075" vertical-offset="28" max-vertical-offset="897">
+        <state line="23" column="47" selection-start="763" selection-end="773" vertical-scroll-proportion="0.5887191" vertical-offset="28" max-vertical-offset="897">
           <folding>
             <marker date="1430044311127" expanded="true" signature="856:904" placeholder="select * fro..devices..." />
           </folding>
