@@ -1,7 +1,7 @@
 <?php
 	define('TOKEN','carketest');
-	define('TEST_APPID','wx911a7106428aedd1');
-	define('TEST_APPSECRET','3ab0dee3c87c2368ad89c57abdcac04d');
+	define('TEST_APPID','*****');
+	define('TEST_APPSECRET','*******');
 
 	//获取access_token的方法
 	define('ACCESS_TOKEN_URL','https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=%s&secret=%s');
